@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="span8">
+      <div id="myCarousel" class="carousel slide">
+        <ol class="carousel-indicators">
+          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+          <li data-target="#myCarousel" data-slide-to="1"></li>
+          <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+      <!-- Carousel items -->
+      <div class="carousel-inner">
+        <div class="active item"><%= image_tag "placeholder01.jpg" %></img></div>
+        <div class="item"><%= image_tag "placeholder02.jpg" %></div>
+        <div class="item"><%= image_tag "placeholder03.jpg" %></div>
+      </div>
+      <!-- Carousel nav -->
+        <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+        <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+      </div>
+    </div>
+    <div class="span4">
+    <h2>Forgot your password?</h2>
+      <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
+
+        <%= devise_error_messages! %><br>
+
+        <div><%= f.label :email %>
+        <%= f.email_field :email, :autofocus => true %></div>
+
+        <button type="submit" class="btn btn-primary">Reset Password</button>
+        <!-- div><%= f.submit "Send me reset password instructions" %></div -->
+      <% end %>
+      <%= render "devise/shared/links" %>
+    </div><!-- span -->
+  </div><!-- row -->
+</div><!-- container -->

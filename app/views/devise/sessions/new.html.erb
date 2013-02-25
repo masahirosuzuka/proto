@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row">
+    <div class="span8">
+      <div id="myCarousel" class="carousel slide">
+        <ol class="carousel-indicators">
+          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+          <li data-target="#myCarousel" data-slide-to="1"></li>
+          <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+      <!-- Carousel items -->
+      <div class="carousel-inner">
+        <div class="active item"><%= image_tag "placeholder01.jpg" %></img></div>
+        <div class="item"><%= image_tag "placeholder02.jpg" %></div>
+        <div class="item"><%= image_tag "placeholder03.jpg" %></div>
+      </div>
+      <!-- Carousel nav -->
+        <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+        <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+      </div>
+    </div><!-- span -->
+    <div class="span3">
+      <h2>Sign in</h2>
+        <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+        <div><%= f.label :email %>
+        <%= f.email_field :email, :autofocus => true %></div>
+        
+        <div><%= f.label :password %>
+        <%= f.password_field :password %></div>
+
+          <% if devise_mapping.rememberable? -%>
+            <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
+          <% end -%>
+
+        <button type="submit" class="btn btn-primary">Sign in</button>
+        <!-- <div><%= f.submit "Sign in" %></div> -->
+        <% end %>
+
+        <%= render "devise/shared/links" %>
+      </div><!-- span -->
+  </div><!-- row -->
+</div><!-- container -->
