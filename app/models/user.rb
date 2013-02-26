@@ -11,5 +11,6 @@ class User < ActiveRecord::Base
 
   validates_uniqueness_of :email
 
-  has_one :profile
+  has_one :profile, :dependent => :destroy
+
 end

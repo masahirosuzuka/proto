@@ -8,6 +8,12 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def is_current_user?
+    unless current_user.id.to_s == params[:id] then
+      redirect_to( :action => :index ) and return
+    end
+  end
+
   # GET /profiles
   # GET /profiles.json
   def index
@@ -41,6 +47,8 @@ class ProfilesController < ApplicationController
   # GET /profiles/new
   # GET /profiles/new.json
   def new
+    is_current_user?
+
     @profile = Profile.new
     @profile.user_id = current_user.id
 
@@ -52,12 +60,16 @@ class ProfilesController < ApplicationController
 
   # GET /profiles/1/edit
   def edit
+    is_current_user?
+
     @profile = Profile.find(params[:id])
   end
 
   # POST /profiles
   # POST /profiles.json
   def create
+    is_current_user?
+
     @profile = Profile.new(params[:profile])
 
     respond_to do |format|
@@ -74,6 +86,8 @@ class ProfilesController < ApplicationController
   # PUT /profiles/1
   # PUT /profiles/1.json
   def update
+    is_current_user?
+
     @profile = Profile.find(params[:id])
 
     respond_to do |format|
@@ -90,6 +104,8 @@ class ProfilesController < ApplicationController
   # DELETE /profiles/1
   # DELETE /profiles/1.json
   def destroy
+    is_current_user?
+
     @profile = Profile.find(params[:id])
     @profile.destroy
 
