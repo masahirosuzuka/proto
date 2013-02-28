@@ -37,6 +37,8 @@ class ProfilesController < ApplicationController
   # GET /profiles/1.json
   def show
     @profile = Profile.find(params[:id])
+    #@posts = Post.find_by_user_id(@profile.user_id, :all)
+    @posts = Post.find(:all, :conditions => { :user_id => @profile.user_id })
 
     respond_to do |format|
       format.html # show.html.erb

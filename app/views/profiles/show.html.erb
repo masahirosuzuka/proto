@@ -11,10 +11,26 @@
   </div>
   <div class="row">
     <div class="span3"><!-- sidebar -->
-
+      <!-- friends -->
+      <!-- %= render "profiles/frends" % -->
     </div>
-    <div class="span9"><!-- projects -->
+    <div class="span9"><!-- my contents -->
+
       <hr>
+      <ul class="nav nav-tabs" id="mainTab">
+        <li class="active"><a href="#posts" data-toggle="tab">Posts</a></li>
+        <li><a href="#messages" data-toggle="tab">Messages</a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div class="tab-pane active" id="posts">
+          <%= render "profiles/posts", val: @posts %>
+        </div>
+        <div class="tab-pane" id="messages">
+          <%= render "profiles/message" %>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

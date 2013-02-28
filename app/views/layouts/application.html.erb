@@ -36,22 +36,22 @@
   </head>
   <body>
 
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="brand" href="/">Proto</a>
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="brand" href="/">Proto</a>
           <ul class="nav">
-            <li class="active"><%= link_to "MyPage", profiles_path %></li>
-            <li><%= link_to "メッセージ", "/path2"  %></li>
+            <li class="active"><%= link_to "マイページ", profiles_path %></li>
+            <li><%= link_to "メッセージ", "message/new"  %></li>
           </ul>
           <%= link_to "新規登録", "/users/sign_up", :class => "btn btn-warning pull-right" %>
           <ul class="nav pull-right">
             <li class="dropdown">
               <a href="" class="dropdown-toggle" data-toggle="dropdown">
                 <% if @user %>
-                  <% @user.email %>
+                  <%= @user.email %>
                 <% else %>
-                  サインイン
+                  <i class="icon-user"></i>
                 <% end %>
                 <span class="caret"></span>
               </a>
@@ -65,45 +65,38 @@
                 </li>
               </ul>
             </li>
-          </ul>
-        </div>
+        </ul>
       </div>
     </div>
+  </div>
 
+  <div class="container">
+    <div class="content">
+      <% if flash[:notice] %>
+        <p class="notice"><%= flash[:notice] %></p>
+      <% end %>
+      <% if flash[:error] %>
+        <p class="error"><%= flash[:error] %></p>
+      <% end %>  
+      <%= yield %>
+    </div><!-- content -->
+  </div> <!-- container -->
+
+  <footer>
     <div class="container">
-      <div class="content">
-        <% if flash[:notice] %>
-          <p class="notice"><%= flash[:notice] %></p>
-        <% end %>
-        <% if flash[:error] %>
-          <p class="error"><%= flash[:error] %></p>
-        <% end %>
-        
-        <%= yield %>
-
+      <hr>
+      <div class="row">
+        <div class="span4">
+          <p><a>利用規約</a></p>
+        </div>
+        <div class="span4">
+        </div>
+        <div class="span4">
+          <p><a>&copy; Proto Dev Team</a></p>
+        </div>
       </div>
-
-      <footer>
-        <hr>
-        <div class="container">
-          <div class="row">
-            <div class="span4">
-              <p><a>利用規約</a></p>
-            </div>
-            <div class="span4">
-              <p>カテゴリ<p>
-              <ul>
-                <li><a>電子工作</a></li>
-              </ul>
-            </div>
-            <div class="span4">
-              <p><a>&copy; Proto Dev Team</a></p>
-            </div>
-          </div>
-        </div><!-- container -->
-      </footer>
-
-    </div> <!-- /container -->
+    </div><!-- container -->
+  </footer>
 
     <!-- Javascripts
     ================================================== -->
