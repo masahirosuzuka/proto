@@ -1,0 +1,10 @@
+<%= link_to "new post", "/posts/new", :class => "btn btn-primary" %>
+
+<% if val %>
+  <% val.each do | post | %>
+    <br>
+    <%= post.title %>
+    <br>
+    <%= post.body %>
+  <% end %>
+<% end %>
