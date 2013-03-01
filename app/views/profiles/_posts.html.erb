@@ -1,10 +1,31 @@
-<%= link_to "new post", "/posts/new", :class => "btn btn-primary" %>
+<a href="#newPostModal" class="btn btn-primary" role="button" data-toggle="modal">New Post</a>
+
+<div class="modal hide fade" id="newPostModal">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>New Post</h3>
+  </div>
+  <div class="modal-body">
+    <%= form_tag :controller => "post", :action => :new, :user_id => @profile.user_id do %>
+      <%= label_tag "Title" %>
+      <%= text_field_tag :title %><br />
+      <%= text_area_tag :body %><br />
+      <button type="submit" class="btn btn-primary pull-right">Post</button>
+    <% end %>
+  </div>
+  <div class="modal-footer">
+  </div>
+</div>
 
 <% if val %>
   <% val.each do | post | %>
-    <br>
-    <%= post.title %>
-    <br>
-    <%= post.body %>
+    <hr>
+    <div class="media">
+      <div class="media-body">
+        <h4 class="media-hedding"><%= post.title %></h4>
+        <%= post.body %>
+        <%= link_to "X", {:controller => "post", :action => "destroy", :id => post.id}, :class => "btn btn-small pull-right" %>
+      </div>
+    </div>
   <% end %>
 <% end %>

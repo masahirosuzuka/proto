@@ -1,6 +1,11 @@
 Proto::Application.routes.draw do
-  resources :profiles
+  match "post/new", :controller => "post", :action => :new
 
+  get "post/new"
+
+  get "post/destroy"
+
+  resources :profiles
 
   devise_for :users
 
