@@ -34,7 +34,9 @@
     <!-- Size should be 32 x 32 pixels -->
     <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
   </head>
+
   <body>
+  <div id="wrap">
 
   <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
@@ -79,8 +81,11 @@
         <p class="error"><%= flash[:error] %></p>
       <% end %>  
       <%= yield %>
+      <div class="push"></div>
     </div><!-- content -->
   </div> <!-- container -->
+  
+  </div><!-- wrap -->
 
   <footer>
     <div class="container">

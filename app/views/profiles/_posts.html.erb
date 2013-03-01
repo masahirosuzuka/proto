@@ -6,7 +6,7 @@
     <h3>New Post</h3>
   </div>
   <div class="modal-body">
-    <%= form_tag :controller => "post", :action => :new, :user_id => @profile.user_id do %>
+    <%= form_tag :controller => "post", :action => :new, :user_id => current_user.id do %>
       <%= label_tag "Title" %>
       <%= text_field_tag :title %><br />
       <%= text_area_tag :body %><br />
@@ -17,14 +17,20 @@
   </div>
 </div>
 
-<% if val %>
-  <% val.each do | post | %>
+<% if posts %>
+  <% posts.each do | post | %>
     <hr>
     <div class="media">
       <div class="media-body">
         <h4 class="media-hedding"><%= post.title %></h4>
         <%= post.body %>
-        <%= link_to "X", {:controller => "post", :action => "destroy", :id => post.id}, :class => "btn btn-small pull-right" %>
+        <div class="btn-toolbar">
+          <div class="btn-group">
+            <a href="" class="btn btn-small"><i class="icon-thumbs-up"></i></a>
+            <a href="/comment/new" class="btn btn-small"><i class="icon-comment"></i></a>
+            <%= link_to "X", {:controller => "post", :action => "destroy", :id => post.id}, :class => "btn btn-small" %>
+          </div>
+        </div>
       </div>
     </div>
   <% end %>
