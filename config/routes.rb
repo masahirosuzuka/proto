@@ -1,14 +1,24 @@
 Proto::Application.routes.draw do
+
+  # Add new Post
   match "post/new", :controller => "post", :action => :new
 
-  get "post/new"
-
+  # Delete Post
   get "post/destroy"
 
+  # Add new Comment to Post
+  match "commnet/new", :controller => "comment", :action => :new
+
+  # Delete Commnet from Post
+  get "comment/destroy"
+
+  # Profile
   resources :profiles
 
+  # Devise
   devise_for :users
 
+  # Home page
   get "home/index"
 
   # The priority is based upon order of creation:

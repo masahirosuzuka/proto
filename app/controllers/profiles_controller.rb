@@ -38,7 +38,7 @@ class ProfilesController < ApplicationController
   def show
     @profile = Profile.find(params[:id])
     @posts = Post.find(:all, :conditions => { :user_id => @profile.user_id })
-    #@comments = Comment.find(:all, :condition => { : })
+    @comments = Comment.find(:all, :conditions => { :user_id => @profile.user_id })
 
     respond_to do |format|
       format.html # show.html.erb
@@ -49,7 +49,7 @@ class ProfilesController < ApplicationController
   # GET /profiles/new
   # GET /profiles/new.json
   def new
-    is_current_user?
+    #is_current_user?
 
     @profile = Profile.new
     @profile.user_id = current_user.id

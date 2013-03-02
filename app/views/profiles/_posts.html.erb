@@ -1,9 +1,46 @@
 <a href="#newPostModal" class="btn btn-primary" role="button" data-toggle="modal">New Post</a>
 
+<% if posts %>
+  <% posts.each do | post | %>
+    <hr>
+    <div class="media">
+      <div class="media-body">
+        <h4 class="media-hedding"><%= post.title %></h4>
+        <%= post.body %>
+        <div class="btn-toolbar">
+          <div class="btn-group">
+            <a href="" class="btn btn-small"><i class="icon-thumbs-up"></i></a>
+            <a href="#newCommentModal" class="btn btn-small" role="button" data-toggle="modal"><i class="icon-comment"></i></a>
+            <%= link_to "X", {:controller => "post", :action => "destroy", :id => post.id}, :class => "btn btn-small" %>
+          </div>
+        </div>
+        <%= render "profiles/comment", comments: @comments %>
+      </div>
+    </div>
+
+    <div class="modal hide fade" id="newCommentModal">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Comment this post</h3>
+      </div>
+      <div class="modal-body">
+        <%= form_tag :controller => "comment", :action => :new, :post_id => post.id do %>
+          <%= label_tag "Title" %>
+          <%= text_field_tag :title %><br />
+          <%= text_area_tag :body %><br />
+          <button type="submit" class="btn btn-primary pull-right">Post</button>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
 <div class="modal hide fade" id="newPostModal">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>New Post</h3>
+    <h3>Post</h3>
   </div>
   <div class="modal-body">
     <%= form_tag :controller => "post", :action => :new, :user_id => current_user.id do %>
@@ -16,22 +53,3 @@
   <div class="modal-footer">
   </div>
 </div>
-
-<% if posts %>
-  <% posts.each do | post | %>
-    <hr>
-    <div class="media">
-      <div class="media-body">
-        <h4 class="media-hedding"><%= post.title %></h4>
-        <%= post.body %>
-        <div class="btn-toolbar">
-          <div class="btn-group">
-            <a href="" class="btn btn-small"><i class="icon-thumbs-up"></i></a>
-            <a href="/comment/new" class="btn btn-small"><i class="icon-comment"></i></a>
-            <%= link_to "X", {:controller => "post", :action => "destroy", :id => post.id}, :class => "btn btn-small" %>
-          </div>
-        </div>
-      </div>
-    </div>
-  <% end %>
-<% end %>
