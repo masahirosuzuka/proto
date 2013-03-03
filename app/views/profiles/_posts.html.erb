@@ -5,30 +5,30 @@
     <hr>
     <div class="media">
       <div class="media-body">
-        <h4 class="media-hedding"><%= post.title %></h4>
+        <h4 class="media-heading"><%= post.title %></h4>
         <%= post.body %>
         <div class="btn-toolbar">
           <div class="btn-group">
             <a href="" class="btn btn-small"><i class="icon-thumbs-up"></i></a>
-            <a href="#newCommentModal" class="btn btn-small" role="button" data-toggle="modal"><i class="icon-comment"></i></a>
+            <a href="#newCommentModal<%= post.id %>" class="btn btn-small" role="button" data-toggle="modal"><i class="icon-comment"></i></a>
             <%= link_to "X", {:controller => "post", :action => "destroy", :id => post.id}, :class => "btn btn-small" %>
           </div>
         </div>
-        <%= render "profiles/comment", comments: @comments %>
+        <%= render "profiles/comment", comments: @comments, post_id: post.id %>
       </div>
     </div>
 
-    <div class="modal hide fade" id="newCommentModal">
+    <div class="modal hide fade" id="newCommentModal<%= post.id %>">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h3>Comment this post</h3>
       </div>
       <div class="modal-body">
-        <%= form_tag :controller => "comment", :action => :new, :post_id => post.id do %>
-          <%= label_tag "Title" %>
-          <%= text_field_tag :title %><br />
-          <%= text_area_tag :body %><br />
-          <button type="submit" class="btn btn-primary pull-right">Post</button>
+        <%= form_tag :controller => "comment", :action => :new, :post_id => post.id, :user_id => current_user.id, :to_user_id => post.user_id do %>
+        <%= label_tag "Title" %>
+        <%= text_field_tag :title %><br />
+        <%= text_area_tag :body %><br />
+        <button type="submit" class="btn btn-primary pull-right">Comment</button>
         <% end %>
       </div>
       <div class="modal-footer">
