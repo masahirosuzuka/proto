@@ -39,12 +39,7 @@ class ProfilesController < ApplicationController
     @profile = Profile.find(params[:id])
     @posts = Post.find(:all, :conditions => { :user_id => @profile.user_id }, :limit => 10)
     @comments = Comment.find(:all, :conditions => { :to_user_id =>  @profile.user_id})
-
-    # Fix me !!!
-    #@comments
-    #@posts.each do | post |
-    #  @comments + Comment.find(:all, :conditions => {:post_id => post.id})
-    #end
+    #@follows = Follow.find(:all, :conditions =>)
 
     respond_to do |format|
       format.html # show.html.erb
