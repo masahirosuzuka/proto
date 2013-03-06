@@ -10,17 +10,18 @@
       <% if @profile.id == current_user.id then %>
         <%= link_to 'Edit Profile', edit_profile_path(@profile) , :class => "btn pull-right" %>
       <% else %>
-        <%= link_to 'Follow', "/follow/new", :id => current_user.id, :class => "btn pull-right" %>
+        <%= link_to 'Follow', "/friendships/new", :id => current_user.id, :class => "btn pull-right" %>
       <% end %>
     </div>
   </div>
   <% if current_user.id == @profile.user_id then %>
     <div class="row">
-      <div class="span3"><!-- sidebar -->
+      <div class="span3">
         <!-- friends -->
-        <%= render "profiles/follow" %>
+        <%= render "profiles/friendship" %>
       </div>
-      <div class="span9"><!-- my contents -->
+      <div class="span9">
+        <!-- content -->
         <hr>
         <ul class="nav nav-tabs" id="mainTab">
           <li class="active"><a href="#posts" data-toggle="tab">Posts</a></li>

@@ -1,5 +1,9 @@
 Proto::Application.routes.draw do
 
+  get "friendships/new"
+
+  get "friendships/destroy"
+
   # Add new Post
   match "post/new", :controller => "post", :action => :new
 

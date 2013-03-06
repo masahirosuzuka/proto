@@ -3,7 +3,17 @@ class Profile < ActiveRecord::Base
 
   validates_uniqueness_of :user_id
 
+  # Useraccount
   belongs_to :user
+
+  # Post
   has_many :post, :dependent => :destroy
-  has_one :follow
+
+  # Friendship
+  has_many :friendships, :foreign_key => :user_id, :dependent => :destroy
+  has_many :friends, :through => :friendships, :foreign_key => :user_id
+
+  # Follow
+  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => :friend_id, :dependent => :destroy
+  has_many :inverse_frends, :through => :inverse_friendships, :source => :profile, :foreign_key => :user_id
 end
