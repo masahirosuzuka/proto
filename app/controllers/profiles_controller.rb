@@ -18,13 +18,22 @@ class ProfilesController < ApplicationController
   # GET /profiles.json
   def index
     current_user_id = current_user.id
-    @profile = Profile.find(current_user_id) rescue nil
+    @profile = Profile.find(:first, :conditions => {:user_id => current_user_id})
 
-    if @profile == nil
+    if @profile == nil then
       redirect_to :action => :new
     else
       redirect_to :controller => :profiles, :action => :show, :id => current_user_id
     end
+    #redirect_to :action => :show, :user_id => current_user_id
+    #current_user_id = current_user.id
+    #@profile = Profile.find(current_user_id) rescue nil
+
+    #if @profile == nil
+    #  redirect_to :action => :new
+    #else
+    #  redirect_to :controller => :profiles, :action => :show, :id => current_user_id
+    #end
     #@profiles = Profile.all
 
     #respond_to do |format|
@@ -36,7 +45,8 @@ class ProfilesController < ApplicationController
   # GET /profiles/1
   # GET /profiles/1.json
   def show
-    @profile = Profile.find(params[:id])
+    @profile = Profile.find(:first, :conditions => {:user_id => params[:id]})
+    #@profile = Profile.find(params[:id])
     @posts = Post.find(:all, :conditions => { :user_id => @profile.user_id }, :limit => 10)
     @comments = Comment.find(:all, :conditions => { :to_user_id =>  @profile.user_id})
     #@follows = Follow.find(:all, :conditions =>)
@@ -71,9 +81,10 @@ class ProfilesController < ApplicationController
   # POST /profiles
   # POST /profiles.json
   def create
-    is_current_user?
+    #is_current_user?
 
     @profile = Profile.new(params[:profile])
+    @profile.user_id = current_user.id
 
     respond_to do |format|
       if @profile.save
