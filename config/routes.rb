@@ -1,8 +1,12 @@
 Proto::Application.routes.draw do
 
-  get "friendships/new"
+  match "messages/create", :controller => :messages, :action => :create
 
-  get "friendships/destroy"
+  match "messages/destroy", :controller => :messages, :acrion => :destroy
+
+  match "friendships/create", :controller => :friendships, :action => :create
+
+  match "friendships/destroy", :controller => :friendships, :action => :destroy
 
   # Add new Post
   match "post/new", :controller => "post", :action => :new

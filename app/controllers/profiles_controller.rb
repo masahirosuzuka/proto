@@ -45,11 +45,14 @@ class ProfilesController < ApplicationController
   # GET /profiles/1
   # GET /profiles/1.json
   def show
+    #
+    # Caution!!!
+    # ":id" means "profile.user_id" not it is not profile.id
+    #
     @profile = Profile.find(:first, :conditions => {:user_id => params[:id]})
-    #@profile = Profile.find(params[:id])
     @posts = Post.find(:all, :conditions => { :user_id => @profile.user_id }, :limit => 10)
     @comments = Comment.find(:all, :conditions => { :to_user_id =>  @profile.user_id})
-    #@follows = Follow.find(:all, :conditions =>)
+    @friends = @profile.friends
 
     respond_to do |format|
       format.html # show.html.erb
@@ -100,6 +103,10 @@ class ProfilesController < ApplicationController
   # PUT /profiles/1
   # PUT /profiles/1.json
   def update
+    #
+    # Caution!!!
+    # ":id" means "profile.user_id" not it is not profile.id
+    #
     is_current_user?
 
     @profile = Profile.find(params[:id])
@@ -118,6 +125,10 @@ class ProfilesController < ApplicationController
   # DELETE /profiles/1
   # DELETE /profiles/1.json
   def destroy
+    #
+    # Caution!!!
+    # ":id" means "profile.user_id" not it is not profile.id
+    #
     is_current_user?
 
     @profile = Profile.find(params[:id])
