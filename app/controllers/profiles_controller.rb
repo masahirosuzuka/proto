@@ -53,6 +53,7 @@ class ProfilesController < ApplicationController
     @posts = Post.find(:all, :conditions => { :user_id => @profile.user_id }, :limit => 10)
     @comments = Comment.find(:all, :conditions => { :to_user_id =>  @profile.user_id})
     @friends = @profile.friends
+    @messages = Message.find(:all, :conditions => { :to_user_id => @profile.user_id } ,:limit => 100)
 
     respond_to do |format|
       format.html # show.html.erb

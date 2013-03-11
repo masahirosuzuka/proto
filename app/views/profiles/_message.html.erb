@@ -1,0 +1,7 @@
+<% if messages then %>
+  <% messages.each do | message | %>
+    <div class="well">
+      <p><%= message.body %></p>
+    </div>
+  <% end %>
+<% end %>
