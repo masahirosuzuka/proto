@@ -44,4 +44,7 @@ gem 'twitter-bootstrap-rails'
 gem 'devise'
 
 # Paperchip
-gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
+gem 'paperclip', :git => "git://github.com/thoughtbot/paperclip.git"
+
+# RSpec
+# gem 'rspec'
