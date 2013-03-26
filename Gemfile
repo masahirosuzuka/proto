@@ -38,7 +38,7 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 # gem 'debugger'
 
 # twitterbootstrap
-gem 'twitter-bootstrap-rails'
+#gem 'twitter-bootstrap-rails'
 
 # Devise
 gem 'devise'
